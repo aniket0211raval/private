@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>For Pookiesha ❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<style>
+/* ==============================
+   CSS VARIABLES & RESET
+============================== */
+:root {
+  --rose:       #e91e8c;
+  --crimson:    #c0185e;
+  --blush:      #f8a7c4;
+  --petal:      #fde0ec;
+  --deep:       #6b0f3a;
+  --night:      #1a0010;
+  --glass-bg:   rgba(255,255,255,0.12);
+  --glass-border: rgba(255,255,255,0.25);
+  --gold:       #f7c948;
+  --white:      #fff;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Lato', sans-serif;
+  background: var(--night);
+  color: var(--white);
+  overflow-x: hidden;
+}
+/* ==============================
+   FLOATING HEARTS (GLOBAL)
+============================== */
+#hearts-canvas {
+  position: fixed; top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none; z-index: 9999;
+}
+/* ==============================
+   SECTION 1 – APOLOGY
+============================== */
+#section-apology {
+  min-height: 100vh;
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.apology-bg {
+  position: absolute; inset: 0;
+  background: url('background.jpg') center/cover no-repeat;
+  filter: brightness(0.45) blur(1px);
+}
+.apology-bg::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom,
+    rgba(26,0,16,0.35) 0%,
+    rgba(107,15,58,0.55) 50%,
+    rgba(26,0,16,0.85) 100%);
+}
+/* floating petals */
+.petal-wrap { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
+.petal {
+  position: absolute; bottom: -60px;
+  font-size: clamp(18px, 3vw, 32px);
+  opacity: 0;
+  animation: floatUp linear infinite;
+}
+@keyframes floatUp {
+  0%   { transform: translateY(0) rotate(0deg); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 0.6; }
+  100% { transform: translateY(-110vh) rotate(720deg); opacity: 0; }
+}
+/* --- apology card --- */
+.apology-card {
+  position: relative; z-index: 2;
+  max-width: 720px; width: 92%;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 28px;
+  padding: clamp(28px, 6vw, 56px);
+  text-align: center;
+  box-shadow: 0 8px 60px rgba(233,30,140,0.35), inset 0 1px 0 rgba(255,255,255,0.2);
+  margin: 100px 0;
+}
+/* circular photo */
+.profile-ring {
+  width: clamp(110px, 22vw, 170px);
+  height: clamp(110px, 22vw, 170px);
+  border-radius: 50%;
+  border: 4px solid rgba(255,255,255,0.5);
+  box-shadow: 0 0 0 6px rgba(233,30,140,0.3), 0 6px 30px rgba(233,30,140,0.5);
+  margin: 0 auto 24px;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+.profile-ring img {
+  width: 100%; height: 100%; object-fit: cover;
+  border-radius: 50%;
+  display: block;
+}
+.apology-title {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(26px, 5vw, 42px);
+  color: var(--blush);
+  margin-bottom: 20px;
+  text-shadow: 0 0 20px rgba(248,167,196,0.7);
+}
+/* typewriter area */
+#typewriter-text {
+  font-family: 'Lato', sans-serif;
+  font-size: clamp(14px, 2.2vw, 17px);
+  line-height: 1.85;
+  color: rgba(255,255,255,0.92);
+  min-height: 320px;
+  text-align: left;
+  white-space: pre-wrap;
+}
+#typewriter-cursor {
+  display: inline-block;
+  width: 2px; height: 1.1em;
+  background: var(--rose);
+  vertical-align: middle;
+  animation: blink 0.7s infinite;
+  margin-left: 2px;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+/* music toggle */
+.music-btn {
+  position: fixed; top: 20px; right: 20px; z-index: 500;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(12px);
+  color: var(--white);
+  border-radius: 50%;
+  width: 48px; height: 48px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 20px rgba(233,30,140,0.3);
+}
+.music-btn:hover { background: rgba(233,30,140,0.3); transform: scale(1.1); }
+/* forgive button */
+.forgive-btn {
+  display: inline-block;
+  margin-top: 32px;
+  padding: 18px 52px;
+  font-size: clamp(16px, 2.5vw, 20px);
+  font-family: 'Dancing Script', cursive;
+  font-weight: 700;
+  color: var(--white);
+  background: linear-gradient(135deg, var(--crimson), var(--rose));
+  border: none; border-radius: 60px;
+  cursor: pointer;
+  box-shadow: 0 0 30px rgba(233,30,140,0.6), 0 0 60px rgba(233,30,140,0.3);
+  animation: glowPulse 2s ease-in-out infinite;
+  transition: transform 0.2s;
+  opacity: 0; pointer-events: none;
+}
+.forgive-btn.visible { opacity: 1; pointer-events: auto; }
+.forgive-btn:hover { transform: scale(1.06); }
+@keyframes glowPulse {
+  0%,100% { box-shadow: 0 0 30px rgba(233,30,140,0.6), 0 0 60px rgba(233,30,140,0.3); }
+  50%      { box-shadow: 0 0 45px rgba(233,30,140,0.9), 0 0 90px rgba(233,30,140,0.5); }
+}
+/* ==============================
+   CONFETTI OVERLAY
+============================== */
+#confetti-canvas {
+  position: fixed; inset: 0; z-index: 1000;
+  pointer-events: none;
+}
+/* ==============================
+   SECTION 2 – PROPOSAL
+============================== */
+#section-proposal {
+  min-height: 100vh;
+  background: linear-gradient(160deg, #1a0010 0%, #3d0a28 40%, #6b0f3a 100%);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: 60px 20px;
+  position: relative; overflow: hidden;
+}
+#section-proposal::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at center, rgba(233,30,140,0.15) 0%, transparent 70%);
+  animation: breathe 4s ease-in-out infinite;
+}
+@keyframes breathe {
+  0%,100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+.proposal-subtitle {
+  font-family: 'Lato', sans-serif;
+  font-size: clamp(16px, 3vw, 22px);
+  color: var(--blush);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease;
+}
+.proposal-subtitle.visible { opacity: 1; transform: none; }
+.proposal-main {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(30px, 7vw, 64px);
+  font-style: italic;
+  color: var(--white);
+  text-shadow: 0 0 40px rgba(233,30,140,0.6);
+  margin-bottom: 50px;
+  opacity: 0; transform: scale(0.8);
+  transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s;
+}
+.proposal-main.visible { opacity: 1; transform: scale(1); }
+.ring-emoji {
+  display: block; font-size: clamp(48px, 10vw, 90px);
+  animation: ringFloat 3s ease-in-out infinite;
+  margin-bottom: 40px;
+}
+@keyframes ringFloat {
+  0%,100% { transform: translateY(0) rotate(-5deg); }
+  50% { transform: translateY(-18px) rotate(5deg); }
+}
+.proposal-btns {
+  display: flex; gap: 24px; flex-wrap: wrap;
+  justify-content: center; align-items: center;
+  position: relative;
+}
+.yes-btn {
+  padding: 18px 56px;
+  font-size: clamp(18px, 3vw, 24px);
+  font-family: 'Dancing Script', cursive;
+  font-weight: 700;
+  color: var(--white);
+  background: linear-gradient(135deg, #c0185e, #e91e8c);
+  border: none; border-radius: 60px;
+  cursor: pointer;
+  box-shadow: 0 0 30px rgba(233,30,140,0.5);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.yes-btn:hover { transform: scale(1.08); box-shadow: 0 0 50px rgba(233,30,140,0.8); }
+.no-btn {
+  padding: 18px 56px;
+  font-size: clamp(18px, 3vw, 24px);
+  font-family: 'Dancing Script', cursive;
+  font-weight: 700;
+  color: rgba(255,255,255,0.8);
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 60px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  position: absolute;
+}
+.no-tooltip {
+  position: fixed;
+  background: rgba(26,0,16,0.9);
+  border: 1px solid var(--rose);
+  color: var(--blush);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  pointer-events: none;
+  z-index: 9000;
+  opacity: 0;
+  transition: opacity 0.3s;
+  white-space: nowrap;
+}
+.no-tooltip.show { opacity: 1; }
+/* ==============================
+   SECTION 3 – FOREVER
+============================== */
+#section-forever {
+  min-height: 100vh;
+  background: linear-gradient(160deg, #1a0010 0%, #2e0820 50%, #1a0010 100%);
+  padding: 80px 20px;
+  text-align: center;
+  position: relative; overflow: hidden;
+}
+#section-forever::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 20%, rgba(247,201,72,0.1) 0%, transparent 60%);
+  animation: breathe 4s ease-in-out infinite;
+}
+.future-title {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(32px, 7vw, 64px);
+  color: var(--gold);
+  text-shadow: 0 0 30px rgba(247,201,72,0.5);
+  margin-bottom: 28px;
+  animation: goldGlow 2.5s ease-in-out infinite;
+}
+@keyframes goldGlow {
+  0%,100% { text-shadow: 0 0 20px rgba(247,201,72,0.5); }
+  50%      { text-shadow: 0 0 40px rgba(247,201,72,0.9), 0 0 80px rgba(247,201,72,0.4); }
+}
+.future-text {
+  font-size: clamp(15px, 2.5vw, 19px);
+  line-height: 1.9;
+  color: rgba(255,255,255,0.88);
+  max-width: 680px; margin: 0 auto 50px;
+}
+/* golden wedding photo frame */
+.wedding-frame {
+  width: min(520px, 92%);
+  aspect-ratio: 4/5;
+  margin: 0 auto 50px;
+  border-radius: 20px;
+  border: 3px solid var(--gold);
+  box-shadow: 0 0 50px rgba(247,201,72,0.35), inset 0 0 50px rgba(0,0,0,0.4);
+  background: linear-gradient(135deg, #2e0820, #4a0f35);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+  animation: frameGlow 3s ease-in-out infinite;
+}
+@keyframes frameGlow {
+  0%,100% { box-shadow: 0 0 50px rgba(247,201,72,0.35), inset 0 0 50px rgba(0,0,0,0.4); }
+  50%      { box-shadow: 0 0 80px rgba(247,201,72,0.65), inset 0 0 50px rgba(0,0,0,0.4); }
+}
+.wedding-frame img {
+  width: 100%; height: 100%; object-fit: cover;
+  border-radius: 17px; display: block;
+}
+.ornament {
+  color: var(--gold);
+  font-size: 22px;
+  letter-spacing: 8px;
+  margin: 10px auto 40px;
+  opacity: 0.6;
+}
+.replay-btn {
+  padding: 16px 44px;
+  font-size: clamp(16px, 2.5vw, 20px);
+  font-family: 'Dancing Script', cursive;
+  font-weight: 700;
+  color: var(--white);
+  background: var(--glass-bg);
+  border: 1px solid var(--rose);
+  border-radius: 60px;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+  transition: all 0.3s;
+  box-shadow: 0 0 20px rgba(233,30,140,0.2);
+}
+.replay-btn:hover {
+  background: rgba(233,30,140,0.2);
+  box-shadow: 0 0 40px rgba(233,30,140,0.5);
+  transform: scale(1.05);
+}
+/* ==============================
+   SECTION – LOVE COUNTER
+============================== */
+#section-counter {
+  padding: 80px 20px;
+  background: linear-gradient(160deg, #1a0010, #2e0820);
+  text-align: center;
+}
+.counter-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(20px, 4vw, 32px);
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 6px;
+}
+.counter-sub {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(28px, 5vw, 48px);
+  color: var(--rose);
+  margin-bottom: 40px;
+  text-shadow: 0 0 20px rgba(233,30,140,0.5);
+}
+.counter-grid {
+  display: flex; gap: 16px; flex-wrap: wrap;
+  justify-content: center;
+}
+.counter-box {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(16px);
+  border-radius: 20px;
+  padding: 28px 32px;
+  min-width: 120px;
+  box-shadow: 0 8px 30px rgba(233,30,140,0.2);
+}
+.counter-num {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(36px, 7vw, 62px);
+  color: var(--white);
+  line-height: 1;
+}
+.counter-label {
+  font-size: 12px;
+  color: var(--blush);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: 6px;
+}
+/* ==============================
+   SCROLL REVEAL
+============================== */
+.reveal {
+  opacity: 0; transform: translateY(40px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible { opacity: 1; transform: none; }
+/* ==============================
+   RESPONSIVE TWEAKS
+============================== */
+@media (max-width: 600px) {
+  .counter-grid { gap: 10px; }
+  .counter-box { padding: 18px 16px; min-width: 80px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ==============================
+     GLOBAL LAYERS
+============================== -->
+<canvas id="hearts-canvas"></canvas>
+<canvas id="confetti-canvas"></canvas>
+<div class="no-tooltip" id="noTooltip">Nice try 😜</div>
+
+<button class="music-btn" id="musicBtn" title="Toggle music">
+  <i class="fa-solid fa-music"></i>
+</button>
+
+<!-- ==============================
+     SECTION 1 – APOLOGY
+============================== -->
+<section id="section-apology">
+  <div class="apology-bg"></div>
+  <div class="petal-wrap" id="petalWrap"></div>
+  <div class="apology-card">
+    <div class="profile-ring" id="profileRing">
+      <img src="couple.jpg" alt="Us"/>
+    </div>
+    <div class="apology-title">Dear Pookiesha ❤️</div>
+    <div id="typewriter-text"><span id="typewriter-cursor"></span></div>
+    <button class="forgive-btn" id="forgiveBtn">❤️ Forgive Me</button>
+  </div>
+</section>
+
+<!-- ==============================
+     SECTION 2 – PROPOSAL
+============================== -->
+<section id="section-proposal">
+  <p class="proposal-subtitle" id="proposalSub">One More Question…</p>
+  <span class="ring-emoji">💍</span>
+  <h2 class="proposal-main" id="proposalMain">Will You Stay With Me Forever? ❤️</h2>
+  <div class="proposal-btns" id="proposalBtns">
+    <button class="yes-btn" id="yesBtn">YES ❤️</button>
+    <button class="no-btn"  id="noBtn">NO 😏</button>
+  </div>
+</section>
+
+<!-- ==============================
+     SECTION 3 – FOREVER
+============================== -->
+<section id="section-forever">
+  <h2 class="future-title reveal">Forever Starts With Us ❤️</h2>
+  <p class="future-text reveal">
+    Thank you for staying.<br><br>
+    No matter how many fights we have, my heart will always find its way back to you.<br><br>
+    I choose you. Today. Tomorrow. And every day after that.<br><br>
+    I love you ❤️
+  </p>
+
+  <div class="wedding-frame reveal" id="weddingFrame">
+    <img src="marriage.jpg" alt="Our marriage"/>
+  </div>
+
+  <div class="ornament reveal">✦ ♥ ✦ ♥ ✦</div>
+
+  <button class="replay-btn reveal" onclick="window.scrollTo({top:0,behavior:'smooth'})">❤️ Replay Our Story</button>
+</section>
+
+<!-- ==============================
+     SECTION – LOVE COUNTER
+============================== -->
+<section id="section-counter">
+  <p class="counter-title reveal">I've Loved You For</p>
+  <p class="counter-sub reveal">...and counting ❤️</p>
+  <div class="counter-grid reveal">
+    <div class="counter-box"><div class="counter-num" id="cDays">0</div><div class="counter-label">Days</div></div>
+    <div class="counter-box"><div class="counter-num" id="cHours">0</div><div class="counter-label">Hours</div></div>
+    <div class="counter-box"><div class="counter-num" id="cMins">0</div><div class="counter-label">Minutes</div></div>
+    <div class="counter-box"><div class="counter-num" id="cSecs">0</div><div class="counter-label">Seconds</div></div>
+  </div>
+</section>
+
+<script>
+/* ======================================================
+   CONFIGURATION — EDIT THIS VALUE
+====================================================== */
+// ↓ Set the date you started loving her (YYYY, MM-1, DD) — JS months are 0-indexed
+const LOVE_START_DATE = new Date(2023, 0, 1); // Jan 1 2023 — CHANGE THIS!
+
+/* ======================================================
+   FLOATING HEARTS (CANVAS)
+====================================================== */
+const hCanvas = document.getElementById('hearts-canvas');
+const hCtx = hCanvas.getContext('2d');
+let hearts = [];
+function resizeHCanvas(){hCanvas.width=innerWidth;hCanvas.height=innerHeight;}
+resizeHCanvas();
+window.addEventListener('resize',resizeHCanvas);
+class Heart{
+  constructor(){this.reset();}
+  reset(){
+    this.x=Math.random()*hCanvas.width;
+    this.y=hCanvas.height+20;
+    this.size=Math.random()*18+8;
+    this.speedY=Math.random()*1.2+0.4;
+    this.speedX=(Math.random()-0.5)*0.5;
+    this.opacity=Math.random()*0.5+0.3;
+    this.color=`hsl(${330+Math.random()*30},80%,${65+Math.random()*20}%)`;
+  }
+  draw(){
+    hCtx.save();hCtx.globalAlpha=this.opacity;hCtx.fillStyle=this.color;
+    hCtx.beginPath();
+    const x=this.x,y=this.y,s=this.size;
+    hCtx.moveTo(x,y);
+    hCtx.bezierCurveTo(x,y-s,x-s*1.5,y-s,x-s*1.5,y-s*0.5);
+    hCtx.bezierCurveTo(x-s*1.5,y-s*1.3,x,y-s*1.7,x,y-s*2);
+    hCtx.bezierCurveTo(x,y-s*1.7,x+s*1.5,y-s*1.3,x+s*1.5,y-s*0.5);
+    hCtx.bezierCurveTo(x+s*1.5,y-s,x,y-s,x,y);
+    hCtx.fill();hCtx.restore();
+  }
+  update(){this.y-=this.speedY;this.x+=this.speedX;this.opacity-=0.0015;}
+}
+// start with a small number, increase on celebration
+let heartRate=0.06;
+function animHearts(){
+  hCtx.clearRect(0,0,hCanvas.width,hCanvas.height);
+  if(Math.random()<heartRate)hearts.push(new Heart());
+  hearts=hearts.filter(h=>{h.update();h.draw();return h.opacity>0&&h.y>-50;});
+  requestAnimationFrame(animHearts);
+}
+animHearts();
+
+/* ======================================================
+   PETAL EMITTERS (SECTION 1)
+====================================================== */
+const petalWrap=document.getElementById('petalWrap');
+const petalEmojis=['🌸','🌺','💮','🌷','❤️','💕','✨'];
+for(let i=0;i<18;i++){
+  const p=document.createElement('div');
+  p.className='petal';
+  p.textContent=petalEmojis[Math.floor(Math.random()*petalEmojis.length)];
+  p.style.left=Math.random()*100+'%';
+  p.style.animationDuration=(Math.random()*8+6)+'s';
+  p.style.animationDelay=(Math.random()*10)+'s';
+  p.style.fontSize=(Math.random()*16+14)+'px';
+  petalWrap.appendChild(p);
+}
+
+/* ======================================================
+   TYPEWRITER
+====================================================== */
+const apologyMsg=`Dear Pookiesha ❤️,
+
+I know I hurt you and I am truly sorry.
+
+When you needed understanding, I became defensive.
+
+When you wanted support, I focused on solving the problem instead of understanding your feelings.
+
+You are not someone I take for granted.
+
+You are one of the most important people in my life.
+
+I regret making you feel unheard and unsupported.
+
+I don't want to repeat the mistakes of the past.
+
+I want to understand you better, support you better and love you better every day.
+
+Thank you for staying. Thank you for being you.
+
+Will you forgive this stupid boy? ❤️`;
+const twEl=document.getElementById('typewriter-text');
+const cursor=document.getElementById('typewriter-cursor');
+let twIdx=0;
+function typeNext(){
+  if(twIdx<apologyMsg.length){
+    const ch=apologyMsg[twIdx];
+    const span=document.createElement('span');
+    span.textContent=ch;
+    twEl.insertBefore(span,cursor);
+    twIdx++;
+    const delay=ch==='\n'?80:ch==='.'||ch==='!'||ch==='?'?60:22;
+    setTimeout(typeNext,delay);
+  } else {
+    document.getElementById('forgiveBtn').classList.add('visible');
+  }
+}
+setTimeout(typeNext,900);
+
+/* ======================================================
+   MUSIC BUTTON (Web Audio oscillator — symbolic)
+====================================================== */
+/* NOTE: To use real background music, host an mp3 file and uncomment below */
+let musicPlaying=false;
+const musicBtn=document.getElementById('musicBtn');
+/*
+const audio=new Audio('your-romantic-song.mp3');
+audio.loop=true; audio.volume=0.4;
+musicBtn.addEventListener('click',()=>{
+  musicPlaying=!musicPlaying;
+  musicPlaying ? audio.play() : audio.pause();
+  musicBtn.innerHTML=musicPlaying
+    ? '<i class="fa-solid fa-pause"></i>'
+    : '<i class="fa-solid fa-music"></i>';
+});
+*/
+musicBtn.addEventListener('click',()=>{
+  musicPlaying=!musicPlaying;
+  musicBtn.innerHTML=musicPlaying
+    ? '<i class="fa-solid fa-pause"></i>'
+    : '<i class="fa-solid fa-music"></i>';
+  musicBtn.style.color=musicPlaying?'var(--rose)':'var(--white)';
+  // Add your Audio() implementation here
+});
+
+/* ======================================================
+   CONFETTI
+====================================================== */
+const confCanvas=document.getElementById('confetti-canvas');
+const cCtx=confCanvas.getContext('2d');
+confCanvas.width=innerWidth; confCanvas.height=innerHeight;
+window.addEventListener('resize',()=>{confCanvas.width=innerWidth;confCanvas.height=innerHeight;});
+let confetti=[];
+const confColors=['#e91e8c','#f8a7c4','#f7c948','#ff6090','#fff','#c0185e'];
+class Confetto{
+  constructor(){
+    this.x=Math.random()*confCanvas.width;
+    this.y=-10;
+    this.w=Math.random()*10+5;
+    this.h=Math.random()*6+3;
+    this.color=confColors[Math.floor(Math.random()*confColors.length)];
+    this.rot=Math.random()*360;
+    this.rotSpeed=(Math.random()-0.5)*6;
+    this.speedY=Math.random()*4+2;
+    this.speedX=(Math.random()-0.5)*2;
+    this.opacity=1;
+  }
+}
+let confettiActive=false;
+function animConfetti(){
+  if(!confettiActive){cCtx.clearRect(0,0,confCanvas.width,confCanvas.height);return;}
+  cCtx.clearRect(0,0,confCanvas.width,confCanvas.height);
+  if(confetti.length<200)confetti.push(new Confetto());
+  confetti.forEach(c=>{
+    cCtx.save();cCtx.globalAlpha=c.opacity;cCtx.fillStyle=c.color;
+    cCtx.translate(c.x,c.y);cCtx.rotate(c.rot*Math.PI/180);
+    cCtx.fillRect(-c.w/2,-c.h/2,c.w,c.h);cCtx.restore();
+    c.y+=c.speedY;c.x+=c.speedX;c.rot+=c.rotSpeed;
+    if(c.y>confCanvas.height)c.opacity-=0.05;
+  });
+  confetti=confetti.filter(c=>c.opacity>0);
+  requestAnimationFrame(animConfetti);
+}
+function launchConfetti(){
+  confettiActive=true; confetti=[];
+  animConfetti();
+  setTimeout(()=>{confettiActive=false;},4500);
+}
+
+/* ======================================================
+   FORGIVE BUTTON → confetti + hearts + go to proposal
+====================================================== */
+document.getElementById('forgiveBtn').addEventListener('click',()=>{
+  launchConfetti();
+  heartRate=0.25;
+  setTimeout(()=>heartRate=0.06,5000);
+  setTimeout(()=>{
+    document.getElementById('section-proposal').scrollIntoView({behavior:'smooth'});
+    setTimeout(()=>{
+      document.getElementById('proposalSub').classList.add('visible');
+      setTimeout(()=>document.getElementById('proposalMain').classList.add('visible'),400);
+    },600);
+  },1200);
+});
+
+/* ======================================================
+   NO BUTTON — RUNNING AWAY
+====================================================== */
+const noBtn=document.getElementById('noBtn');
+const tooltip=document.getElementById('noTooltip');
+const noCopy=['Nice try 😜','Wrong answer 😂','Try YES ❤️','Not allowed 😏','Never gonna work 😂','Choose YES, trust me 😏'];
+let noIdx=0;
+function fleeBtn(e){
+  const vpW=window.innerWidth, vpH=window.innerHeight;
+  let nx,ny;
+  let attempts=0;
+  do{
+    nx=Math.random()*vpW;
+    ny=Math.random()*vpH;
+    attempts++;
+  }while(
+    (Math.abs(nx-(e?e.clientX:vpW/2))<150 || Math.abs(ny-(e?e.clientY:vpH/2))<120) && attempts<20
+  );
+  noBtn.style.position='fixed';
+  noBtn.style.left=Math.min(nx,vpW-120)+'px';
+  noBtn.style.top=Math.min(ny,vpH-60)+'px';
+  noBtn.style.zIndex='8000';
+  tooltip.textContent=noCopy[noIdx%noCopy.length];
+  noIdx++;
+  if(e){tooltip.style.left=e.clientX+'px';tooltip.style.top=(e.clientY-40)+'px';}
+  tooltip.classList.add('show');
+  clearTimeout(tooltip._t);
+  tooltip._t=setTimeout(()=>tooltip.classList.remove('show'),1500);
+}
+// Desktop: flee on mouseenter
+noBtn.addEventListener('mouseenter',fleeBtn);
+// Mobile: flee on touchstart
+noBtn.addEventListener('touchstart',e=>{e.preventDefault();fleeBtn(e.touches[0]);},{passive:false});
+// Prevent any actual click
+noBtn.addEventListener('click',e=>{e.preventDefault();fleeBtn(e);});
+
+/* ======================================================
+   YES BUTTON → confetti + hearts + go to forever section
+====================================================== */
+document.getElementById('yesBtn').addEventListener('click',()=>{
+  launchConfetti();
+  heartRate=0.4;
+  noBtn.style.display='none';
+  setTimeout(()=>heartRate=0.12,8000);
+  document.getElementById('section-forever').scrollIntoView({behavior:'smooth'});
+});
+
+/* ======================================================
+   LOVE COUNTER
+====================================================== */
+function updateCounter(){
+  const now=new Date();
+  const diff=now-LOVE_START_DATE;
+  const totalSecs=Math.floor(diff/1000);
+  const secs=totalSecs%60;
+  const mins=Math.floor(totalSecs/60)%60;
+  const hrs=Math.floor(totalSecs/3600)%24;
+  const days=Math.floor(totalSecs/86400);
+  document.getElementById('cDays').textContent=days.toLocaleString();
+  document.getElementById('cHours').textContent=String(hrs).padStart(2,'0');
+  document.getElementById('cMins').textContent=String(mins).padStart(2,'0');
+  document.getElementById('cSecs').textContent=String(secs).padStart(2,'0');
+}
+updateCounter();
+setInterval(updateCounter,1000);
+
+/* ======================================================
+   SCROLL REVEAL
+====================================================== */
+const revealEls=document.querySelectorAll('.reveal');
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target);}
+  });
+},{threshold:0.12});
+revealEls.forEach(el=>observer.observe(el));
+
+/* ======================================================
+   EXTRA FLOATING HEARTS WHEN FOREVER SECTION IS REACHED
+====================================================== */
+const foreverObserver=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      heartRate=0.18;
+      setTimeout(()=>heartRate=0.06,6000);
+    }
+  });
+},{threshold:0.3});
+foreverObserver.observe(document.getElementById('section-forever'));
+</script>
+</body>
+</html>
